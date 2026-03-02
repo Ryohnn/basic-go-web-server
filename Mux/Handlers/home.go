@@ -1,14 +1,13 @@
 package handlers
 
 import (
-	"fmt"
 	"net/http"
 )
 
 type HomeHandler struct{}
 
 func (h HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	_, err := fmt.Fprintln(w, "Hello!!!")
+	_, err := w.Write([]byte("Hello World!"))
 	if err != nil {
 		return
 	}
