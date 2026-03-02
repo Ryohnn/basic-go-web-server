@@ -1,10 +1,14 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	"fmt"
+	"os"
 
 	"github.com/Ryohnn/basic-go-web-server/Mux/Handlers"
+	"github.com/joho/godotenv"
+
+	"log"
+	"net/http"
 )
 
 func setupRoutes() *http.ServeMux {
@@ -13,8 +17,21 @@ func setupRoutes() *http.ServeMux {
 	return mux
 }
 
-func main() {
-	mux := setupRoutes()
+func loadEnv() {
+	err := godotenv.Load(".env")
 
-	log.Fatal(http.ListenAndServe(":8000", mux))
+	if err != nil {
+		fmt.Fprint(os.Stderr, "Error loading .env file")
+	}
+}
+
+func main() {
+	loadEnv()
+
+	log.Fatal(
+		http.ListenAndServe(
+			":"+os.Getenv("LOCAL_IP"),
+			setupRoutes(),
+		),
+	)
 }

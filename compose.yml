@@ -18,9 +18,10 @@ services:
   db:
     container_name: go-web-server-db
     image: postgres:18-trixie
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: password
+    env_file:
+      - .env
+    volumes:
+      - go-web-server-data:/var/lib/postgresql
     networks:
       - go_network
 
@@ -31,6 +32,9 @@ services:
       - "8081:8080"
     networks:
       - go_network
+
+volumes:
+  go-web-server-data:
 
 networks:
   go_network:
