@@ -11,4 +11,27 @@ services:
     working_dir: /app
     command: air
     ports:
-      - "8080:8080"
+      - "8000:8000"
+    networks:
+      - go_network
+
+  db:
+    container_name: go-web-server-db
+    image: postgres:18-trixie
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    networks:
+      - go_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
+    networks:
+      - go_network
+
+networks:
+  go_network:
+    driver: bridge

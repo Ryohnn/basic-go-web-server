@@ -16,5 +16,5 @@ func setupRoutes() *http.ServeMux {
 func main() {
 	mux := setupRoutes()
 
-	log.Fatal(http.ListenAndServe(":8080", mux))
+	log.Fatal(http.ListenAndServe(":8000", mux))
 }
