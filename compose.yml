@@ -1,0 +1,14 @@
+name: go-web-server
+
+services:
+  app:
+    container_name: go-web-server-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: air
+    ports:
+      - "8080:8080"
