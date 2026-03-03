@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Ryohnn/basic-go-web-server/Mux/Handlers"
+	"github.com/Ryohnn/basic-go-web-server/mux/handlers"
 	"github.com/joho/godotenv"
 
 	"log"
