@@ -2,8 +2,12 @@
 A basic Go web server for me to practice on.
 
 ## Links
-- http://localhost:8080 - BE
-- http://localhost:8081/?pgsql=db&username=root&db=go-web-server&ns=public - Adminer
+- http://localhost - API
+- http://localhost:8081/?pgsql=db&username=root&db=db&ns=public - Adminer
 
+## Commands
 
-
+Update init sql file
+```
+docker compose exec -it db pg_dump db -s > ./database/init.sql
+```

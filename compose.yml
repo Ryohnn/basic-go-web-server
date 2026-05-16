@@ -2,7 +2,7 @@ name: go-web-server
 
 services:
     app:
-        container_name: go-web-server-app
+        container_name: go-app
         build:
             context: .
             dockerfile: Dockerfile
@@ -16,7 +16,7 @@ services:
             - go_network
 
     db:
-        container_name: go-web-server-db
+        container_name: go-db
         image: postgres:18-trixie
         env_file:
             - .env
@@ -24,11 +24,12 @@ services:
             - "5432:5432"
         volumes:
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-            - go-web-server-data:/var/lib/postgresql
+            - go-db-data:/var/lib/postgresql
         networks:
             - go_network
 
     adminer:
+        container_name: go-adminer
         image: adminer
         restart: always
         ports:
@@ -37,7 +38,7 @@ services:
             - go_network
 
 volumes:
-    go-web-server-data:
+    go-db-data:
 
 networks:
     go_network:

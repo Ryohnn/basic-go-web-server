@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
-\restrict nVjuHfOouLl15a60lVpnZn0gJlZM6q0i0SSSAdtnc7rlaITIg77ZB6X1Nj1Q0pa
+\restrict Eh2SpaUKFbplm1dki9V7kqE9GOOhqc5GlxNEd7EngLxkwSHlqGIffuc2zewb7OV
 
--- Dumped from database version 18.3 (Debian 18.3-1.pgdg13+1)
--- Dumped by pg_dump version 18.3 (Debian 18.3-1.pgdg13+1)
+-- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
+-- Dumped by pg_dump version 18.4 (Debian 18.4-1.pgdg13+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -68,5 +68,5 @@ ALTER TABLE ONLY public.games ALTER COLUMN id SET DEFAULT nextval('public.games_
 -- PostgreSQL database dump complete
 --
 
-\unrestrict nVjuHfOouLl15a60lVpnZn0gJlZM6q0i0SSSAdtnc7rlaITIg77ZB6X1Nj1Q0pa
+\unrestrict Eh2SpaUKFbplm1dki9V7kqE9GOOhqc5GlxNEd7EngLxkwSHlqGIffuc2zewb7OV
 
