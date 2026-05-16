@@ -1,43 +1,44 @@
 name: go-web-server
 
 services:
-  app:
-    container_name: go-web-server-app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/app
-    working_dir: /app
-    command: air
-    ports:
-      - "8000:8000"
-    networks:
-      - go_network
+    app:
+        container_name: go-web-server-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/app
+        working_dir: /app
+        command: air
+        ports:
+            - "80:8000"
+        networks:
+            - go_network
 
-  db:
-    container_name: go-web-server-db
-    image: postgres:18-trixie
-    env_file:
-      - .env
-    ports:
-      - "5432:5432"
-    volumes:
-      - go-web-server-data:/var/lib/postgresql
-    networks:
-      - go_network
+    db:
+        container_name: go-web-server-db
+        image: postgres:18-trixie
+        env_file:
+            - .env
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+            - go-web-server-data:/var/lib/postgresql
+        networks:
+            - go_network
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8081:8080"
-    networks:
-      - go_network
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - "8081:8080"
+        networks:
+            - go_network
 
 volumes:
-  go-web-server-data:
+    go-web-server-data:
 
 networks:
-  go_network:
-    driver: bridge
+    go_network:
+        driver: bridge
