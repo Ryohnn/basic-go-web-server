@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict Eh2SpaUKFbplm1dki9V7kqE9GOOhqc5GlxNEd7EngLxkwSHlqGIffuc2zewb7OV
+\restrict tVCmpEgGK9NY70Pn3nsCctq8NUnEeJ3mdZhD5B0dNgUe3XTn8y7rFNcgZ8MYb8R
 
 -- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
 -- Dumped by pg_dump version 18.4 (Debian 18.4-1.pgdg13+1)
@@ -68,5 +68,5 @@ ALTER TABLE ONLY public.games ALTER COLUMN id SET DEFAULT nextval('public.games_
 -- PostgreSQL database dump complete
 --
 
-\unrestrict Eh2SpaUKFbplm1dki9V7kqE9GOOhqc5GlxNEd7EngLxkwSHlqGIffuc2zewb7OV
+\unrestrict tVCmpEgGK9NY70Pn3nsCctq8NUnEeJ3mdZhD5B0dNgUe3XTn8y7rFNcgZ8MYb8R
 
