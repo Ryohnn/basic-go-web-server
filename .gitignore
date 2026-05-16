@@ -32,3 +32,5 @@ go.work.sum
 # .vscode/
 
 tmp/
+
+basic-go-web-server

@@ -30,7 +30,7 @@ func main() {
 
 	log.Fatal(
 		http.ListenAndServe(
-			":"+os.Getenv("LOCAL_IP"),
+			":"+os.Getenv("APP_PORT"),
 			setupRoutes(),
 		),
 	)

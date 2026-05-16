@@ -11,7 +11,7 @@ services:
         working_dir: /app
         command: air
         ports:
-            - "80:8000"
+            - "80:8080"
         networks:
             - go_network
 
