@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict tVCmpEgGK9NY70Pn3nsCctq8NUnEeJ3mdZhD5B0dNgUe3XTn8y7rFNcgZ8MYb8R
+\restrict 35KYz4xSIdaeyqZb3ouz6fANQhiWm9ZfmXaQ1kcB2iqikTxQKgsJhTiBJ8ixekX
 
 -- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
 -- Dumped by pg_dump version 18.4 (Debian 18.4-1.pgdg13+1)
@@ -19,6 +19,23 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: update_modified_column(); Type: FUNCTION; Schema: public; Owner: root
+--
+
+CREATE FUNCTION public.update_modified_column() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    NEW.updated_at = NOW();
+    RETURN NEW;
+END;
+
+$$;
+
+
+ALTER FUNCTION public.update_modified_column() OWNER TO root;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -29,7 +46,9 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.games (
     id integer NOT NULL,
-    title character varying(100)
+    title character varying(100),
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now()
 );
 
 
@@ -65,8 +84,14 @@ ALTER TABLE ONLY public.games ALTER COLUMN id SET DEFAULT nextval('public.games_
 
 
 --
+-- Name: games update_games_modtime; Type: TRIGGER; Schema: public; Owner: root
+--
+
+CREATE TRIGGER update_games_modtime BEFORE UPDATE ON public.games FOR EACH ROW EXECUTE FUNCTION public.update_modified_column();
+
+
+--
 -- PostgreSQL database dump complete
 --
 
-\unrestrict tVCmpEgGK9NY70Pn3nsCctq8NUnEeJ3mdZhD5B0dNgUe3XTn8y7rFNcgZ8MYb8R
-
+\unrestrict 35KYz4xSIdaeyqZb3ouz6fANQhiWm9ZfmXaQ1kcB2iqikTxQKgsJhTiBJ8ixekX
