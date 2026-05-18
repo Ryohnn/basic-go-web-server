@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/Ryohnn/basic-go-web-server/internal/middleware"
 	"github.com/Ryohnn/basic-go-web-server/mux/handlers"
+
 	"github.com/joho/godotenv"
 
 	"log"
@@ -27,11 +29,13 @@ func loadEnv() {
 
 func main() {
 	loadEnv()
+	mux := setupRoutes()
+	handler := middleware.Cors(mux)
 
 	log.Fatal(
 		http.ListenAndServe(
 			":"+os.Getenv("APP_PORT"),
-			setupRoutes(),
+			handler,
 		),
 	)
 }
