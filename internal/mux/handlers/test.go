@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-type HomeHandler struct{}
+type TestHandler struct{}
 
-func (h HomeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (t TestHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode([]string{"Test One", "Test Two"})
 }

@@ -5,19 +5,13 @@ import (
 	"os"
 
 	"github.com/Ryohnn/basic-go-web-server/internal/middleware"
-	"github.com/Ryohnn/basic-go-web-server/mux/handlers"
+	"github.com/Ryohnn/basic-go-web-server/internal/mux"
 
 	"github.com/joho/godotenv"
 
 	"log"
 	"net/http"
 )
-
-func setupRoutes() *http.ServeMux {
-	mux := http.NewServeMux()
-	mux.Handle("/", handlers.HomeHandler{})
-	return mux
-}
 
 func loadEnv() {
 	err := godotenv.Load(".env")
@@ -29,7 +23,7 @@ func loadEnv() {
 
 func main() {
 	loadEnv()
-	mux := setupRoutes()
+	mux := mux.SetupRoutes()
 	handler := middleware.Cors(mux)
 
 	log.Fatal(
