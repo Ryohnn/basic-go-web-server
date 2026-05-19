@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict 35KYz4xSIdaeyqZb3ouz6fANQhiWm9ZfmXaQ1kcB2iqikTxQKgsJhTiBJ8ixekX
+\restrict QmSFfUcFTIQPnOaTehcVqaKPGjlAUm80Oup28xngjKbVq6kelSGQFHyJt0LtVbd
 
 -- Dumped from database version 18.4 (Debian 18.4-1.pgdg13+1)
 -- Dumped by pg_dump version 18.4 (Debian 18.4-1.pgdg13+1)
@@ -47,6 +47,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.games (
     id integer NOT NULL,
     title character varying(100),
+    slug character varying(255) NOT NULL,
+    price integer DEFAULT 0 NOT NULL,
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now()
 );
@@ -84,6 +86,14 @@ ALTER TABLE ONLY public.games ALTER COLUMN id SET DEFAULT nextval('public.games_
 
 
 --
+-- Name: games games_slug_key; Type: CONSTRAINT; Schema: public; Owner: root
+--
+
+ALTER TABLE ONLY public.games
+    ADD CONSTRAINT games_slug_key UNIQUE (slug);
+
+
+--
 -- Name: games update_games_modtime; Type: TRIGGER; Schema: public; Owner: root
 --
 
@@ -94,4 +104,4 @@ CREATE TRIGGER update_games_modtime BEFORE UPDATE ON public.games FOR EACH ROW E
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 35KYz4xSIdaeyqZb3ouz6fANQhiWm9ZfmXaQ1kcB2iqikTxQKgsJhTiBJ8ixekX
+\unrestrict QmSFfUcFTIQPnOaTehcVqaKPGjlAUm80Oup28xngjKbVq6kelSGQFHyJt0LtVbd

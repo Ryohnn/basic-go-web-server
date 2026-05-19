@@ -9,5 +9,5 @@ A basic Go web server for me to practice on.
 
 Update init sql file
 ```
-docker compose exec -it root pg_dump -s > ./database/init.sql
+docker compose exec -it db pg_dump -s > ./database/init.sql
 ```
