@@ -27,8 +27,10 @@ go.work.sum
 # env file
 .env
 
-# Editor/IDE
+# JetBrains / GoLand IDE files
 .idea/
+*.iml
+
 # .vscode/
 
 tmp/
