@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/Ryohnn/basic-go-web-server/internal/middleware"
@@ -14,17 +13,15 @@ import (
 )
 
 func loadEnv() {
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		fmt.Fprint(os.Stderr, "Error loading .env file")
+	if err := godotenv.Load(); err != nil {
+		log.Println("Note: .env file not found, relying on container environment variables")
 	}
 }
 
 func main() {
 	loadEnv()
-	mux := mux.SetupRoutes()
-	handler := middleware.Cors(mux)
+	serveMux := mux.SetupRoutes()
+	handler := middleware.Cors(serveMux)
 
 	log.Fatal(
 		http.ListenAndServe(
