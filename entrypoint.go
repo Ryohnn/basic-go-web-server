@@ -1,26 +1,38 @@
 package main
 
 import (
+	"database/sql"
 	"os"
+
+	_ "github.com/lib/pq"
 
 	"github.com/Ryohnn/basic-go-web-server/internal/middleware"
 	"github.com/Ryohnn/basic-go-web-server/internal/mux"
-
-	"github.com/joho/godotenv"
 
 	"log"
 	"net/http"
 )
 
-func loadEnv() {
-	if err := godotenv.Load(); err != nil {
-		log.Println("Note: .env file not found, relying on container environment variables")
+func setupDB() *sql.DB {
+	dbString := os.Getenv("DATABASE_URL")
+	db, err := sql.Open("postgres", dbString)
+
+	if err != nil {
+		log.Println(err.Error())
+		log.Fatal("Unable to connect to DB.")
 	}
+
+	if err := db.Ping(); err != nil {
+		log.Fatalf("Unable to connect to DB: %v", err)
+	}
+
+	log.Println("Successfully connected to the database!")
+
+	return db
 }
 
 func main() {
-	loadEnv()
-	serveMux := mux.SetupRoutes()
+	serveMux := mux.SetupRoutes(setupDB())
 	handler := middleware.Cors(serveMux)
 
 	log.Fatal(
