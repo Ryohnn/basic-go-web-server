@@ -2,15 +2,27 @@
 
 A basic Go web server for me to practice on.
 
-## Links
-
-- http://localhost - API
-- http://localhost:8081/?pgsql=db&username=root&db=root&ns=public - Adminer
-
 ## Commands
 
-Update init sql file
+Build & run dev
 
+```bash
+docker compose build
+docker compose up
 ```
+
+Build & run prod
+```bash
+docker build --target prod . -t go-app:prod
+docker run --rm -p 80:8080 --env-file .env.prod go-app:prod
+```
+
+Bash into dev DB using container
+```bash
+docker compose exec -it db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+```
+
+Update init sql file (Old)
+```bash
 docker compose exec -it db pg_dump -s > ./database/init.sql
-```
+``

@@ -8,7 +8,7 @@ services:
             dockerfile: Dockerfile
             target: dev
         env_file:
-            - .env
+            - .env.dev
         volumes:
             - .:/app
         working_dir: /app
@@ -22,12 +22,11 @@ services:
         container_name: go-db
         image: postgres:18-trixie
         env_file:
-            - .env
+            - .env.dev
         ports:
             - "5432:5432"
         volumes:
             - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-            - go-db-data:/var/lib/postgresql
         networks:
             - ryan-network
 
@@ -39,9 +38,6 @@ services:
             - "8081:8080"
         networks:
             - ryan-network
-
-volumes:
-    go-db-data:
 
 networks:
     ryan-network:
