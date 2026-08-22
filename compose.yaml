@@ -1,5 +1,13 @@
 name: go-web-server
 
+x-env-dev: &env-dev
+  env_file:
+    - .env.dev
+
+x-local-network: &local-network
+  networks:
+    - ryan-network
+
 services:
     app:
         container_name: go-app
@@ -7,28 +15,22 @@ services:
             context: .
             dockerfile: Dockerfile
             target: dev
-        env_file:
-            - .env.dev
         volumes:
             - .:/app
         working_dir: /app
         command: air
         ports:
             - "80:8080"
-        networks:
-            - ryan-network
+        <<: [*env-dev, *local-network]
 
     db:
         container_name: go-db
         image: postgres:18-trixie
-        env_file:
-            - .env.dev
         ports:
             - "5432:5432"
         # volumes:
         #     - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-        networks:
-            - ryan-network
+        <<: [*env-dev, *local-network]
 
     adminer:
         container_name: go-adminer
@@ -36,8 +38,7 @@ services:
         restart: always
         ports:
             - "8081:8080"
-        networks:
-            - ryan-network
+        <<: [*local-network]
 
 networks:
     ryan-network:

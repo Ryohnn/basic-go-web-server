@@ -13,7 +13,7 @@ docker compose up
 
 Build & run prod
 ```bash
-docker build --target prod . -t go-app:prod
+docker build --target prod -t go-app:prod .
 docker run --rm -p 80:8080 --env-file .env.prod go-app:prod
 ```
 
