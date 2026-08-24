@@ -9,6 +9,6 @@ import (
 
 func SetupRoutes(DB *sql.DB) *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.Handle("/test", handlers.TestHandler{DB: DB})
+	mux.Handle("/games", handlers.GamesHandler{DB: DB})
 	return mux
 }
