@@ -1,15 +1,17 @@
 package handlers
 
 import (
-	"database/sql"
+	"context"
 	"encoding/json"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/jackc/pgx/v5"
 )
 
 type GamesHandler struct {
-	DB *sql.DB
+	DB *pgx.Conn
 }
 
 type Game struct {
@@ -24,7 +26,7 @@ type Game struct {
 }
 
 func (t GamesHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	rows, err := t.DB.Query(`SELECT * FROM "games" LIMIT 10`)
+	rows, err := t.DB.Query(context.Background(), `SELECT * FROM "games" LIMIT 10`)
 
 	if err != nil {
 		log.Println(err)
