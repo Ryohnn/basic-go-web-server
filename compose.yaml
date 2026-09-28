@@ -47,8 +47,12 @@ services:
         - "4566:4566"
         volumes:
         - ./floci-data:/app/data
+        - ./docker/floci/init.sh:/etc/floci/init/ready.d/init.sh
         environment:
             FLOCI_STORAGE_MODE: hybrid
+            AWS_ACCESS_KEY_ID: dev
+            AWS_SECRET_ACCESS_KEY: dev
+            AWS_DEFAULT_REGION: eu-west-2
         <<: [*local-network]
 
 networks:
