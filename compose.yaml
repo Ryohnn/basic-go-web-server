@@ -40,6 +40,17 @@ services:
             - "8081:8080"
         <<: [*local-network]
 
+    floci:
+        container_name: go-floci
+        image: floci/floci:2.1.0-compat
+        ports:
+        - "4566:4566"
+        volumes:
+        - ./floci-data:/app/data
+        environment:
+            FLOCI_STORAGE_MODE: hybrid
+        <<: [*local-network]
+
 networks:
     ryan-network:
         name: ryan-network
