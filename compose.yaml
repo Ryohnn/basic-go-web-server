@@ -53,6 +53,8 @@ services:
             AWS_ACCESS_KEY_ID: dev
             AWS_SECRET_ACCESS_KEY: dev
             AWS_DEFAULT_REGION: eu-west-2
+            AWS_ENDPOINT_URL: http://localhost:4566
+            BUCKET: pixul-images
         <<: [*local-network]
 
 networks:
