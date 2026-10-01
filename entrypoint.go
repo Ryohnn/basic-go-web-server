@@ -3,8 +3,6 @@ package main
 import (
 	"os"
 
-	_ "github.com/lib/pq"
-
 	"github.com/Ryohnn/basic-go-web-server/internal/entrypoint"
 
 	"log"
