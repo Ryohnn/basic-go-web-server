@@ -15,14 +15,13 @@ type GamesHandler struct {
 }
 
 type Game struct {
-	result []string
-	id int64
-	title string
-	slug string
-	description string
-	published bool
-	created_at time.Time
-	updated_at time.Time
+	Id          int64     `json:"id"`
+	Title       string    `json:"title"`
+	Slug        string    `json:"slug"`
+	Description string    `json:"description"`
+	Published   bool      `json:"publish"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 func (t GamesHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -36,17 +35,17 @@ func (t GamesHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	defer rows.Close()
 
-	var result []string
+	var result = []Game{}
 
 	for rows.Next() {
 		var g Game
-		err := rows.Scan(&g.id, &g.title, &g.slug, &g.description, &g.published, &g.created_at, &g.updated_at)
-		if (err != nil) {
+		err := rows.Scan(&g.Id, &g.Title, &g.Slug, &g.Description, &g.Published, &g.CreatedAt, &g.UpdatedAt)
+		if err != nil {
 			log.Println(err)
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 			return
 		}
-		result = append(result, g.title)
+		result = append(result, g)
 	}
 
 	json.NewEncoder(w).Encode(result)
