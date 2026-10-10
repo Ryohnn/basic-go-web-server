@@ -24,5 +24,5 @@ docker compose exec -it db sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
 
 Update init sql file (Old)
 ```bash
-docker compose exec -it db pg_dump -s > ./database/init.sql
-``
+docker compose exec -T db pg_dump -U postgres --schema-only --no-owner --no-privileges --no-comments postgres | grep -v -E '^\\(un)?restrict' > database/init.sql
+```

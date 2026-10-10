@@ -7,19 +7,20 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type GamesHandler struct {
-	DB *pgx.Conn
+	DB *pgxpool.Pool
 }
 
 type Game struct {
 	Id          int64     `json:"id"`
 	Title       string    `json:"title"`
-	Slug        string    `json:"slug"`
 	Description string    `json:"description"`
 	Published   bool      `json:"publish"`
+	Slug        string    `json:"slug"`
+	Price       uint32    `json:"price"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -39,7 +40,7 @@ func (t GamesHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		var g Game
-		err := rows.Scan(&g.Id, &g.Title, &g.Slug, &g.Description, &g.Published, &g.CreatedAt, &g.UpdatedAt)
+		err := rows.Scan(&g.Id, &g.Title, &g.Description, &g.Published, &g.Slug, &g.Price, &g.CreatedAt, &g.UpdatedAt)
 		if err != nil {
 			log.Println(err)
 			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
