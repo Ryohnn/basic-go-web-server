@@ -1,4 +1,4 @@
-module github.com/Ryohnn/basic-go-web-server
+module github.com/Ryohnn/pixul-be
 
 go 1.26.0
 

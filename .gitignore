@@ -36,6 +36,6 @@ go.work.sum
 
 tmp/
 
-basic-go-web-server
+pixul-be
 .neon
 floci-data/

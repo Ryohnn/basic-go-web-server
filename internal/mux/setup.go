@@ -3,7 +3,7 @@ package mux
 import (
 	"net/http"
 
-	"github.com/Ryohnn/basic-go-web-server/internal/mux/handlers"
+	"github.com/Ryohnn/pixul-be/internal/mux/handlers"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 

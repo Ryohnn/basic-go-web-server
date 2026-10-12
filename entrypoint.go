@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/Ryohnn/basic-go-web-server/internal/entrypoint"
+	"github.com/Ryohnn/pixul-be/internal/entrypoint"
 
 	"log"
 	"net/http"

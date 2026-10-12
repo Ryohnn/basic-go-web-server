@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Ryohnn/basic-go-web-server/internal/middleware"
-	"github.com/Ryohnn/basic-go-web-server/internal/mux"
+	"github.com/Ryohnn/pixul-be/internal/middleware"
+	"github.com/Ryohnn/pixul-be/internal/mux"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
